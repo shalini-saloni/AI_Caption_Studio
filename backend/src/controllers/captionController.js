@@ -11,10 +11,8 @@ exports.createCaption = async (req, res, next) => {
 
     const imageUrl = `/uploads/${req.file.filename}`;
     
-    // Generate caption using AI
-    const generatedCaption = await generateCaption(req.file.path);
+    const generatedCaption = await generateCaption(req.file.buffer);
 
-    // Save to database
     const caption = await prisma.caption.create({
       data: {
         userId: req.user.id,
